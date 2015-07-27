@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<head>
+  <!-- Load stylesheet -->
+  <link rel="stylesheet" type="text/css" href="iac-style.css">
+  <!-- Load Javascipt -->
+  <script src="js/IAC.js"></script>
+  <!-- Load Leaflet - map application -->
+  <link rel="stylesheet" href="leaflet/leaflet.css"/>
+  <script src="leaflet/leaflet.js"></script>
+  <script src="leaflet/shp.js"></script>
+  <script src="leaflet/catiline.js"></script>
+  <script src="leaflet/leaflet.shpfile.js"></script>
+  <!-- Load JQuery UI -->
+  <link rel="stylesheet" href="js/jquery-ui.min.css"/>
+  <script src="js/external/jquery/jquery.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <!-- Used for the JQuery Content Panel Switcher -->
+  <link rel="stylesheet" type="text/css" media="screen" href="js/jquery.content-panel-switcher.css"/> 
+  <script type="text/javascript" src="js/jquery.content-panel-switcher.js"></script> 
+
+  <!--The orginal load of the page   maybe it works, who knows? -->
+  <script>  
+    loadFirstPassage();
+    filez = "passages/2.1.1";
+  </script>
+</head>
+
+<header>
+<title>Imagining Ancient Corinth</title>
+<h1 id="iac">Imagining Ancient Corinth</h1>
+</header>
+<body>
+  <nav>
+  <ul>
+    <li>
+      <li><a href="www.google.com">Home</a><li>
+      <li><a href="">Table of Contents</a>
+    <ul>
+      <li>
+        <a href="javascript:loadNextPassage('passages/1.1.1.json')">Book 1</a>
+        <ul>
+          <li><a href="javascript:loadNextPassage('passages/1.1.1.json')">Chapter 1</a></li>
+          <li><a href="javascript:loadNextPassage('passages/1.2.1.json')">Chapter 2</a></li>
+          <li><a href="javascript:loadNextPassage('passages/1.3.1.json')">Chapter 3</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="javascript:loadNextPassage('passages/2.1.1.json.json')">Book 2</a>
+        <ul>
+          <li>
+            <a href="javascript:loadNextPassage('passages/2.1.1.json')">Chapter 1</a>
+            <ul>
+              <li><a href="javascript:loadNextPassage('passages/2.1.1.json')">2.1.1</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.2.json')">2.1.2</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.3.json')">2.1.3</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.4.json')">2.1.4</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.5.json')">2.1.5</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.6.json')">2.1.6</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.7.json')">2.1.7</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.8.json')">2.1.8</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.1.9.json')">2.1.9</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:loadNextPassage('passages/2.2.1.json')">Chapter 2</a>
+            <ul>
+              <li><a href="javascript:loadNextPassage('passages/2.2.1.json')">2.2.1</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.2.json')">2.2.2</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.3.json')">2.2.3</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.4.json')">2.2.4</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.5.json')">2.2.5</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.6.json')">2.2.6</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.7.json')">2.2.7</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.2.8.json')">2.2.8</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:loadNextPassage('passages/2.3.1.json')">Chapter 3</a>
+            <ul>
+              <li><a href="javascript:loadNextPassage('passages/2.3.1.json')">2.3.1</a></li>
+              <li><a href="javascript:loadNextPassage('passages/2.3.2.json')">2.3.2</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="">Book 3</a>
+        <ul>
+          <li><a href="">Chapter 1</a></li>
+          <li><a href="">Chapter 2</a></li>
+          <li><a href="">Chapter 3</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="">Book 4</a>
+        <ul>
+          <li><a href="">Chapter 1</a></li>
+          <li><a href="">Chapter 2</a></li>
+          <li><a href="">Chapter 3</a></li>
+        </ul>
+      </li>
+    </ul>
+    </li>
+  <li><a href="www.youtube.com">Activities</a><li> 
+  <li><a href="www.cornellcollege.edu">Media</a><li> 
+  <li><a href="www.cornellcollege.edu">Grammar</a><li> 
+  <li><a href="www.cornellcollege.edu">Culture Essays</a><li> 
+  <li><a href="www.cornellcollege.edu">Vocabulary</a><li> 
+  <li><a href="www.cornellcollege.edu">About</a><li>
+  </nav><br>
+<div id="map">
+<script>
+/* This scripting deals with the map*/
+ // creates a map
+	var map = L.map('map').setView([37.906, 22.879], 16);
+ // addings a tittle layer
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+	{
+    	id: 'corinth2015.aa8f5852',
+    	accessToken: 'pk.eyJ1IjoiY29yaW50aDIwMTUiLCJhIjoiYzM2NTIzM2M0OWFkZGMzNjFlM2ZkNGIyZjgyODg2NzIifQ.-4m5xDlvKtdTzleAeJveUw'
+    }
+).addTo(map);
+	
+ //adding shapefiles to the map
+  var shpfile = new L.Shapefile('Corinth-1.zip',{onEachFeature:function(feature, layer) {
+      if (feature.properties) 
+      {
+       //console.log(feature.properties)
+        layer.bindPopup(Object.keys(feature.properties).map(function(k)
+        {
+          //console.log(feature.properties);
+          return k + ": " + feature.properties[k] ;
+        }).join("<br />"),{maxHeight:200});
+      }
+  }});
+         shpfile.addTo(map);
+         shpfile.once("load", function(){
+          console.log("finished loaded shapefile");
+         });
+
+
+  /*//adds a marker to the map
+	var markerB = L.marker([41.926, -91.4263]).addTo(map);
+	markerB.bindPopup("<b>Building</b><br>I am a building on this map. <a href='http://www.youtube.com'>Passage 2.3.2</a>");
+	//creating a new path and adding this path to the map.
+	var pathOne = L.polyline([
+		[41.926, -91.4263],
+		[41.9237, -91.426],
+		[41.92365, -91.4252]]
+		).addTo(map);
+	pathOne.bindPopup("<b>My path to Ink Pond");*/
+
+
+</script>
+
+</div>
+<div id="next-last-button-container">
+<button id="nextButton">Next Passage</button>
+<button id="lastButton">Last Passage</button>
+</div>
+<br>
+<div id="title"></div>
+
+<div id="pre-post-section">
+	<!--Nav buttons. The switcher buttons, basic anchor tags, with the switcher class -->
+	<a id="pre-reading" class="switcher set-pre-post">Pre Reading</a>
+	<a id="post-reading" class="switcher set-pre-post">Post Reading</a>
+
+    <div id="pre-button" class="button-container">
+        <!-- Buttons that when clicked activate dialog boxes for the pre-reading. -->
+        <button id="max-pre" class="max"></button>
+    </div>
+
+    <div id="post-button" class="button-container">
+        <!-- Buttons that when clicked activate dialog boxes for the post reading. -->
+        <button id="max-post" class="max"></button>
+    </div>
+	<!-- The panel that will display the content -->
+	<div id="pre-post"></div>
+    
+	<!-- The actual content that will switch in and out of the panel -->
+	<div id="pre-reading-content" class="switcher-content set-pre-post show"></div>
+	<div id="post-reading-content" class="switcher-content set-pre-post"></div>  
+</div>
+
+<div id="passage-section">
+    <!-- Title -->
+	<div id="passage-title"></div>
+
+    <div id="passage-button" class="button-container">
+        <!-- Button that when clicked activates a dialog box for the passage. -->
+        <button id="max-passage" class="max"></button>
+    </div>
+
+	<!-- The panel that will display the content -->
+	<div id="passage-content"></div>
+  <!-- The dialog box for the passage -->
+    <div id="passage-dialog"></div>
+</div>
+
+<div id="media-section">
+    <!--Title -->
+    <div id="media-title">Media</div>
+
+    <div id="media-button" class="button-container">
+        <!-- Button that when clicked activates a dalog box for the passage. -->
+        <button id="max-media" class="max"></button>
+    </div>
+
+    <!-- The panel that will display the content -->
+    <div id="media-content"></div>
+    <!-- The dialog box for the media -->
+    <div id="media-dialog"></div>
+</div> 
+
+<!-- This is the dialog box that it is activated when a user maximizes/clicks on a word -->
+<div id="dialog" title=""></div>
+
+<br>
+<div id="next-last-button-container">
+<button id="nextButtonBttm">Next Passage</button>
+<button id="lastButtonBttm">Last Passage</button>
+</div>
+<br>
+<br>
+<br>
+</body>
+
+<script> 
+//Opens a dialog box when the button max-passage is clicked
+$('#pre-reading-content').dialog({
+    autoOpen: false,
+    title: 'Pre Reading'
+});
+$('#max-pre').click(function() {
+    $('#pre-reading-content').dialog('open');
+    return false;
+});
+//Opens a dialog box when the button max-passage is clicked
+$('#post-reading-content').dialog({
+    autoOpen: false,
+    title: 'Post Reading'
+});
+$('#max-post').click(function() {
+    $('#post-reading-content').dialog('open');
+    return false;
+});
+//Opens a dialog box when the button max-passage is clicked
+    $('#max-passage').click(function() {
+
+      $('#passage-dialog')
+        .html($('#passage-content').html())
+        .dialog({ title: 'Passage' });
+    });
+//Opens a dialog box when the button max-passage is clicked
+    $('#max-media').click(function() {
+
+        $('#media-dialog')
+        .html($('#media-content').html())
+        .dialog({ title: 'Media' });
+    });
+
+        //words that have explantions
+        var messages = {
+        "lorem": "Explanation about Lorem.",
+        "dolor": "Explanation about dolor.",
+        "laboris": "distinct section of a piece of writing.",
+        "eiusmod": "explantion of eiusmod."
+      };
+      
+  //words in the passage section that are contained in a span tag are clickable which opens thier explanation using the JQuery dialog pop up box.
+      $("#passage-content").on("mouseover", "span", function(e) {
+    e.stopPropagation();
+    var $this = $( this ),
+        _text = $this.text();
+
+    var dialogContent = messages[_text.toLowerCase()];
+    if(dialogContent && dialogContent.length > 0) {
+        $( "#dialog" ).dialog({
+            "modal": true,
+            "title": _text
+        }).html(dialogContent);
+    }
+});
+
+//Scirpt that allows the button #lastButton to complete a function
+$(document).ready(function(){
+    $('#lastButton').click(function(){
+        getLastSection(filez);
+    });
+  });
+//Scirpt that allows the button #nextButton to complete a function
+$(document).ready(function(){
+    $('#nextButton').click(function(){
+       getNextSection(filez);
+    });
+  });
+
+//Scirpt that allows the button #lastButton to complete a function
+$(document).ready(function(){
+    $('#lastButtonBttm').click(function(){
+        getLastSection(filez);
+    });
+  });
+//Scirpt that allows the button #nextButton to complete a function
+$(document).ready(function(){
+    $('#nextButtonBttm').click(function(){
+       getNextSection(filez);
+    });
+  });
+
+//Initialize the Content Switcher, specify the speed (in milliseconds) of the transition and the panel ID you wish the content to appear in 
+$(document).ready(function()
+{
+    jcps.fader(300, '#pre-post', '.set-pre-post');
+});
+var fliez = "passages/2.1.1.json";
+
+//does not work for translating greek blahh
+//function for encoding to utf8
+function encode_utf8( s ){
+return unescape( encodeURIComponent( s ) );
+}
+
+//functions for resizing images inside of divs
+  $(function() {
+    $( "#media-content img" ).resizable();
+  });
+
+  $(function() {
+    $( ".p.media img" ).resizable();
+  });
+
+  $(function() {
+    $( "#media-dialog img" ).resizable();
+  });
+
+  $(function() {
+    $( ".p.serif img" ).resizable();
+  });
+
+ 
+
+
+//functions for resizing textboxes
+  $(function() {
+    $( "#pre-post-section" ).resizable();
+  });
+  $(function() {
+    $( "#passage-section" ).resizable();
+  });
+  $(function() {
+    $( "#media-section" ).resizable();
+  });
+</script>
+
