@@ -117,11 +117,15 @@
  // addings a tittle layer
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
 	{
-    	id: 'corinth2015.aa8f5852',
+    	id: 'corinth2015.a22822d3',
     	accessToken: 'pk.eyJ1IjoiY29yaW50aDIwMTUiLCJhIjoiYzM2NTIzM2M0OWFkZGMzNjFlM2ZkNGIyZjgyODg2NzIifQ.-4m5xDlvKtdTzleAeJveUw'
     }
 ).addTo(map);
-	
+
+//var featLayer = L.geoJson().addTo(map);
+//featLayer.loadURL('corinth-pausanias.json');
+ // L.geoJson("corinth-pausanias.json").addTo(map);
+	/*
  //adding shapefiles to the map
   var shpfile = new L.Shapefile('Corinth-1.zip',{onEachFeature:function(feature, layer) {
       if (feature.properties) 
@@ -139,13 +143,10 @@
           console.log("finished loaded shapefile");
          });
 
-
-  /*//adds a marker to the map
-	var markerB = L.marker([41.926, -91.4263]).addTo(map);
-	markerB.bindPopup("<b>Building</b><br>I am a building on this map. <a href='http://www.youtube.com'>Passage 2.3.2</a>");
+/*
 	//creating a new path and adding this path to the map.
 	var pathOne = L.polyline([
-		[41.926, -91.4263],
+		[37.905, 22.879],
 		[41.9237, -91.426],
 		[41.92365, -91.4252]]
 		).addTo(map);
