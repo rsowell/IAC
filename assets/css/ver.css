@@ -1,0 +1,31 @@
+html, body, #container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  padding-top: 50px;
+}
+input[type="radio"], input[type="checkbox"] {
+  margin: 0;
+}
+#sidebar {
+  width: 250px;
+  height: 100%;
+  max-width: 100%;
+  float: left;
+  -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+}
+
+#map {
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  float: left;
+  border-style: solid;
+}
+#text-container{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-style: solid;
+  float: left;
+}
