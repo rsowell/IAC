@@ -14,6 +14,13 @@ input[type="radio"], input[type="checkbox"] {
   padding-right: 0px;
   padding-left: 0px;
 }
+#prev-next{
+  padding-top: 5px;
+}
+.btn-blk{
+  background-color: #282828;
+  border-style: none;
+}
 #reading-container{
   height: 100%;
   padding-right: 0px;
