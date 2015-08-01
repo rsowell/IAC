@@ -176,3 +176,83 @@ $("#reading-max").on("click", function(e){
   map.invalidateSize();
 });
 
+
+$("#pre-reading-btn").on("click", function(e){
+  var content = $('#pre-content').html();
+  $("#text-content").html(content);
+});
+
+$("#passage-btn").on("click", function(e){
+  var content = $('#passage-content').html();
+  $("#text-content").html(content);
+});
+
+$("#post-reading-btn").on("click", function(e){
+  var content = $('#post-content').html();
+  $("#text-content").html(content);
+});
+
+$("#media-btn").on("click", function(e){
+  var content = $('#media-content').html();
+  $("#text-content").html(content);
+});
+
+$("#question-btn").on("click", function(e){
+  var content = $('#question-content').html();
+  $("#text-content").html(content);
+});
+
+/*
+This function should be loaded everytime a new passage is loaded. It will look at each content section.
+If a content section is null/empty The button should be disabled and should look grayed out
+*/
+function disableButtons(){
+  if($("#pre-content").html() == "" )
+  {
+    $('#pre-reading-btn').prop('disabled', true); // Disables visually and functionally
+  }
+  if($("#passage-content").html() == "" )
+  {
+    $('#passage-btn').prop('disabled', true); // Disables visually and functionally
+  }
+  if($("#post-content").html() == "" )
+  {
+    $('#post-reading-btn').prop('disabled', true); // Disables visually and functionally
+  }
+  if($("#media-content").html() == "" )
+  {
+    $('#media-btn').prop('disabled', true); // Disables visually and functionally
+  }
+  if($("#question-content").html() == "" )
+  {
+    $('#question-btn').prop('disabled', true); // Disables visually and functionally
+  }
+}
+
+
+//This section of code handles the calling of the first passage.  Loading in the JSON file and changing the contents of the page.
+function loadFirstPassage()
+{
+    var file = "passages/2.3.1.json";
+        //load the new JSON file and change the elements
+        $.getJSON(file, function( data ) {
+            $("#passageNumber").html(data["passageNumber"]);
+            $("#text-title-name").html(data["title"]);;
+            $("#pre-content").html(data["preReading"]);
+            $("#post-content").html(data["postReading"]);
+            $("#passage-content").html(data["reading"]);
+            $("#media-content").html(data["media"]);
+            var content = $('#passage-content').html();
+            $("#text-content").html(content);
+            //if the site has gps data, pan to the site.
+            /*if(data["lat"] != "" && data["lon"] != "")
+            { 
+                map.panTo([data["lon"],data["lat"]], 
+                {
+                    animate:true, 
+                    duration:3
+                })
+            }*/
+                disableButtons();
+       });
+}
