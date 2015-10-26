@@ -1,1 +1,23 @@
 This is a git repo for the Imagining Ancient Corinth project.
+
+
+TO DO::
+1.  Database
+	a.	Install Modular for database
+	b.	Correct Format for database
+2.  Content From Database
+	a.	Add a Full Chapter
+	b.	Transverse through the Chapter
+	c.	Additional Content
+3.	Map
+	a.	Layers on map
+	b.	Create Data Structure for Storing each Location
+	c.	Search the Data Structure via Textbox
+4.	Pausanias' Path
+	a.	Draw a Path
+	b.	Determine his Current Location
+		+	Thus, we have previous/next locations
+5.	Responsiveness
+	a.	Small Screens
+	b.	CSS Issues when Rendered not in Full Screen
+	c.	Menu
