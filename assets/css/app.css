@@ -17,9 +17,16 @@ input[type="radio"], input[type="checkbox"] {
 #prev-next{
   padding-top: 5px;
 }
+#collapsed-nav-btn{
+  float: none;
+   margin: 0 auto;
+}
 .btn-blk{
   background-color: #282828;
   border-style: none;
+}
+.btn{
+  white-space: normal;
 }
 #reading-container{
   height: 100%;
@@ -28,6 +35,11 @@ input[type="radio"], input[type="checkbox"] {
 }
 .max{
   height: 100%;
+}
+.row{
+  height: 100%;
+  margin-left: 2px;
+  margin-right: 2px
 }
 #reading-sidebar{
   background-color: white;

@@ -2,6 +2,15 @@ var map, featureList, boroughSearch = [], theaterSearch = [], museumSearch = [];
 
 $(window).resize(function() {
   sizeLayerControl();
+  if ($(this).width() <  768)
+  {
+     //$(".row").height("50%");
+     $("#container").height("200%");
+  }
+  else
+  {
+     $("#container").height("100%");
+  }
 });
 
 $(document).on("click", ".feature-row", function(e) {
@@ -147,14 +156,15 @@ $("#map-sidebar-hide-btn").on("click", function(e){
 
 $("#map-max").on("click", function(e){
   width = $("#map-container").width() / $(document).width() * 100; 
-  if(width != 100)
+  console.log(width);
+  if(width < 90)
   {
       $("#map-container").width("100%");
       $("#reading-container").hide();
   }
   else
   {
-      $("#map-container").width("50%");
+      $("#map-container").attr( "style", "" );
       $("#reading-container").show();
   }
   map.invalidateSize();
@@ -163,14 +173,14 @@ $("#map-max").on("click", function(e){
 $("#reading-max").on("click", function(e){
   width = $("#reading-container").width() / $(document).width() * 100; 
   console.log(width);
-  if(width != 100)
+  if(width < 90)
   {
       $("#reading-container").width("100%");
       $("#map-container").hide();
   }
   else
   {
-      $("#reading-container").width("50%");
+      $("#reading-container").attr( "style", "" );
       $("#map-container").show();
   }
   map.invalidateSize();
