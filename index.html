@@ -123,13 +123,6 @@
                 attributionControl: false
               });
 
-<<<<<<< HEAD
-=======
-              //adding geojsonlayer to the map using ajax geojson data laoder
-             // var corinthGeo = $.parseJSON(corinth);
-              console.log(corinth);
-              //console.log(cornithGeo);
->>>>>>> origin/IAC-2.0
               var geojsonLayer = new L.geoJson(corinth,{onEachFeature:function(feature, layer) {
               if (feature.properties) 
               {
