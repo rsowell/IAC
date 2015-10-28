@@ -5,24 +5,43 @@ This is a git repo for the Imagining Ancient Corinth project.
 
 TO DO::
 1.  Database
+
 	a.	Install Modular for database     ☑
-	b.	Correct Format for databas	 ->   Check with John     
+	
+	b.	Correct Format for databas	 ->   Check with John  
+	
 2.  Content From Database
+
 	a.	Pull a single Passage from the Database  ☑
+	
 	b.	Add a Full Chapter               ☑
+	
 	c.	Pull a list of passage numbers.  ☑
+	
 	d.      Create a Data Structure that tracks the passages in order.	-> Array from JSON object.
+	
 	e.	Transverse through the Chapter		->  LinkedList-ish Object.  Knows of current passage, the one before, and the one after.  Has a set number of nodes it will track.
+	
 	f.	Additional Content			-> Media.  New entity? Probably
+	
 3.	Map
+
 	a.	Layers on map					       -> Layer Control pluggin from LeafLeat.  We just need to find the layers that work for us.
+	
 	b.	Create Data Structure for Storing each Location        -> Array that holds objects: Name, ONOMA
+	
 	c.	Search the Data Structure via Search-box               -> BootLeaf has an example
+
 4.	Pausanias' Path
+	
 	a.	Draw a Path    					       -> Lat/Lon are contained in each passage. Grab those / plot them 
+	
 	b.	Determine his Current Location			       -> Next and Previous passages.  This is where they come into play.
-		+	Thus, we have previous/next locations
+			+	Thus, we have previous/next locations
+
 5.	Responsiveness							-> We will cross this bridge.... eventaully, maybe.
+	
 	a.	Small Screens
+	
 	b.	CSS Issues when Rendered not in Full Screen
 	c.	Menu
