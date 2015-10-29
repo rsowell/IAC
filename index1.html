@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Imagining Ancient Cornith</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+  <!-- Load Leaflet - map application -->
+  <link rel="stylesheet" href="leaflet/leaflet.css"/>
+  <script src="leaflet/leaflet.js"></script>
+  <script src="leaflet/shp.js"></script>
+  <script src="leaflet/catiline.js"></script>
+  <script src="leaflet/leaflet.shpfile.js"></script>
+  <script src="leaflet/leaflet.ajax.min.js"></script>
+  <script src="corinth-geo.js"></script>
+
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon-76.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon-120.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicon-152.png">
+  <link rel="icon" sizes="196x196" href="assets/img/favicon-196.png">
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button> <!-- Hamburger button for collapsed navbar -->
+      <div id="prevNext" class="navbar-right">
+        <button type="button" id="previous" class="navbar-toggle btn btn-blk pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-arrow-right white"></i></button>
+        <button type="button" id="next" class="navbar-toggle btn btn-blk pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-arrow-left white"></i></button>
+      </div> <!-- prevNext for collapsed nav bar--> 
+        <div class="navbar-icon-container">
+          <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
+          <a href="#" class="navbar-icon pull-right visible-xs" id="reading-sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
+          <a href="#" class="navbar-icon pull-right visible-xs" id="map-sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
+        </div><!-- navbar-icon-container -->
+        <a class="navbar-brand" href="#">IAC</a>
+      </div><!-- navbar-header -->
+      <div class="navbar-collapse collapse" id="myNavbar">
+       <div id="prevNext" class="navbar-right">
+        <button type="button" id="previous" class="btn btn-blk pull-right"><i class="glyphicon glyphicon-arrow-right white"></i></button>
+        <button type="button" id="next" class="btn btn-blk pull-right"><i class="glyphicon glyphicon-arrow-left white"></i></button>
+      </div> <!-- prevNext -->
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe white"></i>&nbsp;&nbsp;Resources <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;About</a></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Home</a></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Culture Essays</a></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Vocab</a></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Grammar</a></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Media</a></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Activities</a></li>
+            <li class="divider hidden-xs"></li>
+            <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user"></i>&nbsp;&nbsp;Login</a></li>
+          </ul> <!-- dropdown-menu -->
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Table Of Contents <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Book 1</a></li>
+            <li><a href="#" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Book 2</a></li>
+            <li><a href="#" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Book 3</a></li>
+            <li><a href="#" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Book 4</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div> <!--/.navbar-collapse -->
+  </div> <!-- container-fluid -->
+</nav> <!-- navbar navbar-inverse navbar-fixed-top -->
+
+<div id="container">
+  <div class="row">
+    <div id="map-container" class="col-md-6 col-sm-6 col-xs-12">
+        <div id="map-sidebar" class="col-xs-3 panel-default">
+            <div id="map-sidebar-title" class="panel-heading">Points Of Interest
+             <button type="button" class="btn btn-xs btn-default pull-right" id="map-sidebar-hide-btn"><i class="glyphicon glyphicon-remove"></i></button>
+            </div><!--map-sidebar-title-->
+            <div id="map-sidebar-contents" class="panel-body">
+              <ul>
+                <li>Temple A</li>
+                <li>Temple B</li>
+                <li>Temple C</li>
+                <li>Temple D</li>
+                <li>Temple E</li>
+              </ul>
+            </div><!--map-sidebar-contents-->
+          </div><!--map-sidebar-->
+          <div id="map" class="col-xs-9">
+            <div id="map-btn">
+              <div id="map-list" class="btn-group">
+                <button type="button" id="map-list-btn" class="btn btn-lg btn-default pull-right"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+                <button type="button" id="map-max" class="btn btn-lg btn-default pull-right"><i class="glyphicon glyphicon-fullscreen"></i></button>
+              </div><!--map-list-->
+            </div><!--map-btn-->
+            <script>
+              var pirates = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+              {
+                id: 'corinth2015.a22822d3',
+                accessToken: 'pk.eyJ1IjoiY29yaW50aDIwMTUiLCJhIjoiYzM2NTIzM2M0OWFkZGMzNjFlM2ZkNGIyZjgyODg2NzIifQ.-4m5xDlvKtdTzleAeJveUw'
+              }
+              );
+
+              map = L.map("map", {
+                zoom: 13,
+                center: [37.905, 22.879],
+                layers: [pirates],
+                attributionControl: false
+              });
+
+              //adding geojsonlayer to the map using ajax geojson data laoder
+             // var corinthGeo = $.parseJSON(corinth);
+              console.log(corinth);
+              //console.log(cornithGeo);
+
+              var geojsonLayer = new L.geoJson(corinth,{onEachFeature:function(feature, layer) {
+              if (feature.properties) 
+              {
+               layer.bindPopup(Object.keys(feature.properties).map(function(k)
+               { 
+                 return k + ": " + feature.properties[k] ;
+               }).join("<br />"),{maxHeight:200});
+             }
+           }});
+              geojsonLayer.addTo(map);
+          </script>
+        </div><!--map-->
+    </div><!--map-container-->
+  <div id="reading-container"class="col-md-6 col-sm-6 col-xs-12">
+      <div id="reading-sidebar" class="col-xs-3 panel-default">
+        <div id="reading-sidebar-title" class="panel-heading">Passage <var id="passageNumber"></var> 
+          <button type="button" class="btn btn-xs btn-default pull-right" id="reading-sidebar-hide-btn"><i class="glyphicon glyphicon-remove"></i></button>
+        </div><!--reading-sidebar-container-->
+        <div id="reading-sidebar-contents" class="panel-body">
+          <button type="button" id="pre-reading-btn" class="btn btn-default btn-lg pull-left btn-block">&nbsp;Pre Readings</button><br>
+          <button type="button" id="passage-btn" class="btn btn-default btn-lg pull-left btn-block">&nbsp;Passage</button><br>
+          <button type="button" id="post-reading-btn" class="btn btn-default btn-lg pull-left btn-block">&nbsp;Post Readings</button><br>
+          <button type="button" id="media-btn" class="btn btn-default btn-lg pull-left btn-block">&nbsp;Media</button><br>
+          <button type="button" id="question-btn" class="btn btn-default btn-lg pull-left btn-block">&nbsp;Questions</button>
+        </div><!--reading-sidebar-contents-->
+      </div><!--reading-sdiebar-->
+      <div id="text-container" class="col-xs-9">
+       <div id="text-title"><var id="text-title-name"></var>
+        <div id="reading-list" class="btn-group">
+          <button type="button" id="reading-list-btn" class="btn btn-lg btn-default pull-right"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+          <button type="button" id="reading-max" class="btn btn-lg btn-default pull-right"><i class="glyphicon glyphicon-fullscreen"></i></button>
+        </div><!--reading-list-->
+      </div><!--text-title-->
+      <div id="text-content"></div><!--text-content-->
+      <div id="pre-content" class="hidden-content"></div><!--pre-content-->
+      <div id="passage-content" class="hidden-content"></div><!--passage-content-->
+      <div id="post-content" class="hidden-content"></div><!--post-content-->
+      <div id="media-content" class="hidden-content"></div><!--media-content-->
+      <div id="question-content" class="hidden-content"></div><!--question-content-->
+    </div><!--text-container-->
+</div><!--reading-container-->
+</div><!--row-->
+</div><!--container-fluid-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+<script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+<script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  loadFirstPassage();
+</script>
+</body>
+</html>
