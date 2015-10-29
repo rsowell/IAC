@@ -4,12 +4,11 @@ $(window).resize(function() {
   sizeLayerControl();
   if ($(this).width() <  768)
   {
-     //$(".row").height("50%");
-     $("#container").height("200%");
+     $(".row").height("50%");
   }
   else
   {
-     $("#container").height("100%");
+     $(".row").height("100%");
   }
 });
 
@@ -217,52 +216,54 @@ This function should be loaded everytime a new passage is loaded. It will look a
 If a content section is null/empty The button should be disabled and should look grayed out
 */
 function disableButtons(){
-  if($("#pre-content").html() == "" )
+  if($("#pre-content").text() == "" )
   {
     $('#pre-reading-btn').prop('disabled', true); // Disables visually and functionally
+    console.log('yayayayay');
   }
-  if($("#passage-content").html() == "" )
+  if($("#passage-content").text() == "" )
   {
     $('#passage-btn').prop('disabled', true); // Disables visually and functionally
   }
-  if($("#post-content").html() == "" )
+  if($("#post-content").text() == "" )
   {
     $('#post-reading-btn').prop('disabled', true); // Disables visually and functionally
   }
-  if($("#media-content").html() == "" )
+  if($("#media-content").text() == "" )
   {
     $('#media-btn').prop('disabled', true); // Disables visually and functionally
   }
-  if($("#question-content").html() == "" )
+  if($("#question-content").text() == "" )
   {
     $('#question-btn').prop('disabled', true); // Disables visually and functionally
   }
 }
 
 
-//This section of code handles the calling of the first passage.  Loading in the JSON file and changing the contents of the page.
-function loadFirstPassage()
-{
-    var file = "passages/2.3.1.json";
-        //load the new JSON file and change the elements
-        $.getJSON(file, function( data ) {
-            $("#passageNumber").html(data["passageNumber"]);
-            $("#text-title-name").html(data["title"]);;
-            $("#pre-content").html(data["preReading"]);
-            $("#post-content").html(data["postReading"]);
-            $("#passage-content").html(data["reading"]);
-            $("#media-content").html(data["media"]);
+        /**This function grabs a passage by its Passage Number.
+        It will then set all of the HTML reading container fields.
+        @param pasNum the number of the passage.*/
+        function getPassage(pasNum){
+        //This grabs a Service that given a passage number, will return all of the infomration regarding the passage.
+        $.getJSON('http://imaginingancientcorinth.com/cms/rest/views/rest_api?filters[num]='+pasNum , function (data) {
+            $("#passageNumber").html(data[0].passageNumber);
+            $("#text-title-name").html(data[0].node_title);
+            $("#pre-content").html(data[0].pre_q);
+            $("#post-content").html(data[0].post_q);
+            $("#passage-content").html(data[0].body);
+            //$("#question-content").html(data[0].question);
+            //$("#media-content").html();
             var content = $('#passage-content').html();
             $("#text-content").html(content);
             //if the site has gps data, pan to the site.
-            /*if(data["lat"] != "" && data["lon"] != "")
-            { 
-                map.panTo([data["lon"],data["lat"]], 
+            if(data[0].lat != null && data[0].lon != null)
+             { 
+                map.panTo([data[0].lon, data[0].lat], 
                 {
                     animate:true, 
                     duration:3
-                })
-            }*/
+                });
+             }
                 disableButtons();
-       });
-}
+          });
+        }
