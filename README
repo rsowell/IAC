@@ -8,7 +8,9 @@ TO DO::
 
 	a.	Install Modular for database     ☑
 	
-	b.	Correct Format for databas	 ->   Check with John  
+	b.	Correct Format for database	 ->   Check with John 
+	
+	c.      New Entity for Media             ->   Check with John
 	
 2.  Content From Database
 
@@ -18,11 +20,13 @@ TO DO::
 	
 	c.	Pull a list of passage numbers.  ☑
 	
-	d.      Create a Data Structure that tracks the passages in order.	-> Array from JSON object.
+	d.      Create a Data Structure that tracks the passages in order.	☑
 	
-	e.	Transverse through the Chapter		->  LinkedList-ish Object.  Knows of current passage, the one before, and the one after.  Has a set number of nodes it will track.
+	e.	Load a Passage into the HTML of the website			☑
 	
-	f.	Additional Content			-> Media.  New entity? Probably
+	f.	Transverse through the Chapter		->  LinkedList-ish Object.  Knows of current passage, the one before, and the one after.  Has a set number of nodes it will track.
+	
+	g.	Additional Content			-> Media.  New entity? Probably
 	
 3.	Map
 
