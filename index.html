@@ -123,7 +123,10 @@
                 attributionControl: false
               });
 
+
+    //Adding a GeoJson layer of every mapped location.
               var geojsonLayer = new L.geoJson(corinth,{onEachFeature:function(feature, layer) {
+              //If the feature hs properties, make a popup blimp and put them on it.
               if (feature.properties) 
               {
                layer.bindPopup(Object.keys(feature.properties).map(function(k)
@@ -133,7 +136,31 @@
              }
            }});
               geojsonLayer.addTo(map);
+              
+              
+              
+              
+              
+        /**This portion of the code Querys Drupal**/
+        //It grabs a Service that contains all of the number passage numbers.
+        //The service comes in shape of a Json object.
+        var passageNumbers = null;
+
+        $.getJSON('http://imaginingancientcorinth.com/cms/rest/views/passagenumber/', function (data) {
+          passageNumbers = data;
+        });
+
+        //This grabs a Service that given a passage number, will return all of the infomration regarding the passage.
+        var bookData = null;
+
+        $.getJSON('http://imaginingancientcorinth.com/cms/rest/views/rest_api?filters[num]=2.2.1', function (data) {
+            bookData = data;
+        });
+
+
+
           </script>
+        }
         </div><!--map-->
     </div><!--map-container-->
   <div id="reading-container"class="col-md-6 col-sm-6 col-xs-12">
@@ -175,7 +202,7 @@
 <script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
-  loadFirstPassage();
+getPassage('2.2.1');
 </script>
 </body>
 </html>
