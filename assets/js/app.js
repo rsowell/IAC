@@ -219,7 +219,6 @@ function disableButtons(){
   if($("#pre-content").text() == "" )
   {
     $('#pre-reading-btn').prop('disabled', true); // Disables visually and functionally
-    console.log('yayayayay');
   }
   if($("#passage-content").text() == "" )
   {
