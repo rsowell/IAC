@@ -8,18 +8,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="author" content="Joe Sterchele">
   <title>Imagining Ancient Cornith</title>
+  <!-- JQuery/Bootstrap CSS && JS -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- My Javascript/CSS File -->
   <link rel="stylesheet" href="assets/css/app.css">
   <!-- Load Leaflet - map application -->
   <link rel="stylesheet" href="leaflet/leaflet.css"/>
   <script src="leaflet/leaflet.js"></script>
-  <script src="leaflet/shp.js"></script>
-  <script src="leaflet/catiline.js"></script>
-  <script src="leaflet/leaflet.shpfile.js"></script>
   <script src="leaflet/leaflet.ajax.min.js"></script>
   <script src="corinth-geo.js"></script>
 
@@ -39,9 +38,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button> <!-- Hamburger button for collapsed navbar -->
-      <div id="prevNext" class="navbar-right">
-        <button type="button" id="previous" class="navbar-toggle btn btn-blk pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-arrow-right white"></i></button>
-        <button type="button" id="next" class="navbar-toggle btn btn-blk pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-arrow-left white"></i></button>
+      <!---  change the id <div id="prevNext" class="navbar-right">
+        <button type="button" id="next" class="navbar-toggle btn btn-blk pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-arrow-right white"></i></button>
+        <button type="button" id="previous" class="navbar-toggle btn btn-blk pull-right" data-toggle="collapse"><i class="glyphicon glyphicon-arrow-left white"></i></button>
       </div> <!-- prevNext for collapsed nav bar--> 
         <div class="navbar-icon-container">
           <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
@@ -52,8 +51,8 @@
       </div><!-- navbar-header -->
       <div class="navbar-collapse collapse" id="myNavbar">
        <div id="prevNext" class="navbar-right">
-        <button type="button" id="previous" class="btn btn-blk pull-right"><i class="glyphicon glyphicon-arrow-right white"></i></button>
-        <button type="button" id="next" class="btn btn-blk pull-right"><i class="glyphicon glyphicon-arrow-left white"></i></button>
+        <button type="button" id="next" class="btn btn-blk pull-right"><i class="glyphicon glyphicon-arrow-right white"></i></button>
+        <button type="button" id="previous" class="btn btn-blk pull-right"><i class="glyphicon glyphicon-arrow-left white"></i></button>
       </div> <!-- prevNext -->
       <ul class="nav navbar-nav">
         <li class="dropdown">
@@ -135,32 +134,8 @@
                }).join("<br />"),{maxHeight:200});
              }
            }});
-              geojsonLayer.addTo(map);
-              
-              
-              
-              
-              
-        /**This portion of the code Querys Drupal**/
-        //It grabs a Service that contains all of the number passage numbers.
-        //The service comes in shape of a Json object.
-        var passageNumbers = null;
-
-        $.getJSON('http://imaginingancientcorinth.com/cms/rest/views/passagenumber/', function (data) {
-          passageNumbers = data;
-        });
-
-        //This grabs a Service that given a passage number, will return all of the infomration regarding the passage.
-        var bookData = null;
-
-        $.getJSON('http://imaginingancientcorinth.com/cms/rest/views/rest_api?filters[num]=2.2.1', function (data) {
-            bookData = data;
-        });
-
-
-
+              geojsonLayer.addTo(map);      
           </script>
-        }
         </div><!--map-->
     </div><!--map-container-->
   <div id="reading-container"class="col-md-6 col-sm-6 col-xs-12">
@@ -193,6 +168,8 @@
 </div><!--reading-container-->
 </div><!--row-->
 </div><!--container-fluid-->
+
+<!-- Leaflet/typeahead/list -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
@@ -202,7 +179,14 @@
 <script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
-getPassage('2.2.1');
+/**This portion of the code Querys Drupal**/   
+        //The service comes in shape of a Json object.
+        $.getJSON('http://imaginingancientcorinth.com/cms/rest/views/passagenumber/', function (data) {
+          passageNumbers = data;
+          numPassages = passageNumbers.length;
+          retrievePassage();
+        });
+        passageId = getPassageID();
 </script>
 </body>
 </html>
